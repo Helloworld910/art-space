@@ -1,4 +1,5 @@
 import './App.css';
+import './Input-fun.js'
 import { Canvas, useFrame, useLoader } from '@react-three/fiber'
 import { TextureLoader } from "three"
 import { useRef, Suspense } from 'react';
@@ -13,29 +14,31 @@ function Ring() {
 
     const ringRef = useRef()
 
-    const ringMap_prop = useTexture({
-        map: 'alien-color.jpg',
-        
-        normalMap: 'alien-normal.jpg',
 
-
-        roughnessMap: 'alien-rough.jpg',
-
-        
-        aoMap: 'alien-ao.jpg',
-
-        bumpMap: 'alien-displacement.jpg',
-        specularMap: 'alien-emissive.jpg'
-
-
-    })
-
-
+    
     useFrame(({ clock }) => {
 
         ringRef.current.rotation.y = Math.sin(clock.getElapsedTime());
         ringRef.current.rotation.z = clock.getElapsedTime();
     });
+
+
+    const ringMap_prop = useTexture({
+
+        aoMap: 'alien-ao.jpg',
+ 
+
+        map: 'alien-color.jpg',
+
+        normalMap: 'alien-normal.png',
+        roughnessMap: 'alien-rough.jpg',
+
+        displacementMap: 'alien-height.png',
+
+        
+
+
+    })
 
 
     return (
@@ -53,7 +56,7 @@ function Ring() {
 
             />
 
-            <meshPhongMaterial
+            <meshStandardMaterial
 
 
                 {...ringMap_prop}
@@ -81,13 +84,18 @@ function Center() {
   
     const centerRef = useRef()
 
-    const sunmap_prop = useTexture({
-        map: 'center-color.jpg',
+    const centerMap_prop = useTexture({
+
         aoMap: 'center-ao.jpg',
-        normalMap: 'center-normal-opengl.png',
-        roughnessMap: 'center-roughness.jpg',
-        bumpMap: 'center-height.png',
-        specularMap: 'center-emissive.jpg'
+        emissiveMap: 'center-emissive.jpg',
+        
+        map: 'center-color.jpg',
+
+        normalMap: 'center-normal.png',
+        roughnessMap: 'center-rough.jpg',
+
+        displacementMap: 'center-height.png',
+        
 
     })
 
@@ -117,10 +125,10 @@ function Center() {
             />
 
 
-            <meshPhongMaterial
+            <meshStandardMaterial
 
 
-                {...sunmap_prop}
+                {...centerMap_prop}
 
                 visible={true}
 
@@ -148,6 +156,21 @@ function SatA() {
     });
 
 
+    const sataMap_prop = useTexture({
+
+        aoMap: 'satA-ao.jpg',
+   
+
+        map: 'satA-color.jpg',
+
+        normalMap: 'satA-normal.jpg',
+        roughnessMap: 'satA-rough.jpg',
+
+        displacementMap: 'satA-height.jpg',
+
+
+    })
+
     
     return (
         <mesh
@@ -160,10 +183,12 @@ function SatA() {
 
             />
 
-            <meshBasicMaterial
+            <meshStandardMaterial
+
+                {...sataMap_prop}
                 visible={true}
                 wireframe={false}
-                color={"violet"}
+                
             />
         </mesh>
 
@@ -185,7 +210,20 @@ function SatB() {
         satBRef.current.position.x = Math.cos(clock.getElapsedTime()+2) * 100
     });
 
+    const satbMap_prop = useTexture({
 
+        aoMap: 'satB-ao.jpg',
+      
+
+        map: 'satB-color.jpg',
+
+        normalMap: 'satB-normal.png',
+        roughnessMap: 'satB-rough.jpg',
+
+        displacementMap: 'satB-height.png',
+
+
+    })
 
     return (
         <mesh
@@ -198,10 +236,12 @@ function SatB() {
 
             />
 
-            <meshBasicMaterial
+            <meshStandardMaterial
+
+                {...satbMap_prop}
                 visible={true}
                 wireframe={false}
-                color={"orange"}
+                
             />
         </mesh>
 
@@ -225,7 +265,20 @@ function SatC() {
         satCRef.current.position.z = -10 + Math.sin(clock.getElapsedTime()+1) * 70
     });
 
+    const satcMap_prop = useTexture({
 
+        aoMap: 'satC-ao.jpg',
+
+
+        map: 'satC-color.jpg',
+
+        normalMap: 'satC-normal.png',
+        roughnessMap: 'satC-rough.jpg',
+
+        displacementMap: 'satC-height.png'
+
+
+    })
 
     return (
         <mesh
@@ -238,10 +291,12 @@ function SatC() {
 
             />
 
-            <meshBasicMaterial
+            <meshStandardMaterial
+
+                {...satcMap_prop}
                 visible={true}
                 wireframe={false}
-                color={"yellow"}
+                
             />
         </mesh>
 
@@ -273,10 +328,12 @@ function App() {
 
                 <pointLight
 
-                    color={"#d94409"}
-                    intensity={1}
+
+
+                    color={"orange"}
+                    intensity={0.3}
                     distance={0}
-                    decay={2}
+                    decay={3}
                     position={[0,0,-10]}
 
                 />
@@ -285,7 +342,7 @@ function App() {
                 <ambientLight
 
 
-                    intensity={0.1}
+                    intensity={0.3}
 
                     color={"#ffffff"}
 
@@ -308,7 +365,7 @@ function App() {
                 />
 
 
-                <Stars />
+                <Stars radius={600} />
 
 
                 <Center />
