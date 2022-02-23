@@ -1,9 +1,10 @@
 import './App.css';
-import './Input-fun.js'
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
-import { TextureLoader } from "three"
+import { Chara, Loader, Test } from './Character'
+import {Charb, Flight } from './sandbox.js'
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
+import { BoxGeometry, TextureLoader } from "three"
 import { useRef, Suspense } from 'react';
-import { useTexture, FlyControls, Stars } from "@react-three/drei"
+import { useTexture, Stars } from "@react-three/drei"
 
 
 
@@ -310,21 +311,25 @@ function SatC() {
 
 
 
+
+
 function App() {
 
     return (
 
         < Canvas
 
-
-            camera={{ aspect: window.innerWidth / window.innerHeight, fov: 45, position: [0, 0, 500], near: 1, far: 2000 }}
+            camera={{
+                aspect: window.innerWidth / window.innerHeight, fov: 45,
+                position: [0, 0, 500], near: 1, far: 20000
+            }}
 
 
 
         >
 
+            <Suspense fallback={<Loader />}>
 
-            <Suspense fallback={null}>
 
                 <pointLight
 
@@ -351,18 +356,35 @@ function App() {
 
                 
 
-                <FlyControls
+                <Flight/>
 
+                <Charb
 
+                  
 
-                    movementSpeed={20}
-
-                    rollSpeed={1}
-
-
-
+                    
 
                 />
+
+             
+
+                <Test />
+
+                
+                
+                <pointLight
+
+
+
+                    color={"green"}
+                    intensity={1}
+                    distance={0}
+                    decay={2}
+                    position={[200, 300, -10]}
+
+                />
+
+
 
 
                 <Stars radius={600} />
