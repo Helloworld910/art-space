@@ -1,8 +1,8 @@
 import './App.css';
-import { Chara, Loader, Test } from './Character'
-import {Charb, Flight } from './sandbox.js'
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
-import { BoxGeometry, TextureLoader } from "three"
+import { Loader, Test } from './Utils.js'
+import { Flight, CharA } from './Character.js'
+import { Canvas, useFrame } from '@react-three/fiber'
+
 import { useRef, Suspense } from 'react';
 import { useTexture, Stars } from "@react-three/drei"
 
@@ -354,24 +354,7 @@ function App() {
 
                 />
 
-                
 
-                <Flight/>
-
-                <Charb
-
-                  
-
-                    
-
-                />
-
-             
-
-                <Test />
-
-                
-                
                 <pointLight
 
 
@@ -386,21 +369,26 @@ function App() {
 
 
 
+                <Flight/>
+
+
+
 
                 <Stars radius={600} />
 
-
                 <Center />
-
-
 
                 <Ring />
 
-
                 <SatA />
-
                 <SatB />
                 <SatC />
+
+                
+
+                <Test />
+                <CharA />
+
 
             </Suspense>
 
