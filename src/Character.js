@@ -5,12 +5,12 @@ all actions and sets up a THREE.AnimationMixer for it so that you don't have to.
 All of the assets actions, action-names and clips are available in its output. 
 */
 
-import React, { useEffect, useRef, useState, useCallback } from "react"
-import { useGLTF, useTexture, useAnimations, Billboard, Text, FlyControls, DeviceOrientationControls } from "@react-three/drei"
+import React, { useEffect, useRef, useState } from "react"
+import { useGLTF, useAnimations, Billboard, Text, FlyControls, Html } from "@react-three/drei"
 import { a, useSpring } from "@react-spring/three"
 import { useFrame } from "@react-three/fiber"
-import { Clock, } from "three"
-import * as THREE from 'three';
+import { Form } from "./Form.js"
+
 
 
 
@@ -22,14 +22,32 @@ let dialogState = 0
 
 
 
-function Dialog() {
-    
-    const dialogRef = useRef()
+const choiceUser = ["Hello! Who are you?", "blank", "blank",
+    "Lorem ipsum dolor", "sit amet", "consectetuer adipiscing elit",
+    "porttitor ut", "iaculis quis, sem.", "In sem justo",
+    "commodo ut", "suscipit at,", "pharetra vitae",
+    "non sapien", "Proin mattis lacinia", "Nam quis nulla.",
+    "Aenean id metus", "id velit ullamcorper", "Phasellus enim erat",
+    "vestibulum vel", "aliquam a, posuere", "Integer tempor.",
+    "exercitation", "ullamco", "Etiam tristique non, ",
+    "Ut enim ad", "submit", "submittwo",
+    "Submit", "Donec iaculis", "venenatis quis, ante.",
+    "consequat eget,", "sapien elit,", "Duis interdum suscipit,  ",
+    "erat volutpat.", "ipsum. Aliquam", "Fusce aliquam vestibulum",
+    "sollicitudin et, dolor.", "commodo et,", "sapien nunc.",
+    "lmao", "I will exit now", "blank",
+    "blank"
+]
 
-    return (null)               
-     
 
-}
+
+
+const dialSparoch = ["Hello there! How are you today?","Sed vel lectus.", "Integer malesuada",
+    "molestie", "Morbi scelerisque", "luctus velit.",
+    "Integer lacinia.", "Mauris tincidunt", "Enter your name now",
+    "sem sed arcu.", "Nulla non lectus sed", "nisl molestie malesuada",
+    "lmao", "okay bye"]
+
 
 
 
@@ -45,6 +63,9 @@ export function CharA(props) {
     const [dialoG, setDialoG] = useState(false)
     const [talK, settalK] = useState(false)
     const [index, setIndex] = useState(1)
+    const [choiceUserIndex, setchoiceUserIndex] = useState(0)
+    const [dialIndex, setdialIndex] = useState(0)
+    const [inputSwitch, setinputSwitch] = useState(false)
     // Animate the selection halo
     const { color, scale } = useSpring({ scale: hovered ? [1.15, 1.15, 1] : [1, 1, 1], color: hovered ? "cyan" : "aquamarine" })
     // Change cursor on hover-state
@@ -57,7 +78,105 @@ export function CharA(props) {
         return () => actions[names[index]].fadeOut(0.5)
     }, [index, actions, names])
 
-    console.log(scale)
+
+
+    const [formValue, setformValue] = useState("Feedback..")
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setinputSwitch(false)
+        alert(`The name you entered was: ${formValue}`)
+        setchoiceUserIndex(40)
+        settalK(false)
+
+    }
+
+
+
+    useEffect(() => {
+
+        if (choiceUserIndex == 3) {
+
+            setdialIndex(1)
+
+        }
+
+        if (choiceUserIndex == 7) {
+            setdialIndex(2)
+        }
+
+        if (choiceUserIndex == 10) {
+
+            setdialIndex(3)
+        }
+
+
+
+        if (choiceUserIndex == 13) {
+
+            setdialIndex(4)
+
+        }
+        if (choiceUserIndex == 16) {
+
+            setdialIndex(5)
+
+        }
+
+        if (choiceUserIndex == 19) {
+
+            setdialIndex(6)
+
+        }
+
+        if (choiceUserIndex == 22) {
+
+            setdialIndex(7)
+
+        }
+
+        if (choiceUserIndex == 25) {
+
+            setdialIndex(8)
+
+        }
+
+        if (choiceUserIndex == 28) {
+
+            setdialIndex(9)
+
+        }
+
+
+        if (choiceUserIndex == 31) {
+
+            setdialIndex(10)
+
+        }
+
+        if (choiceUserIndex == 34) {
+
+            setdialIndex(11)
+
+        }
+
+        if (choiceUserIndex == 37) {
+
+            setdialIndex(12)
+
+        }
+
+
+
+        if (choiceUserIndex == 40) {
+
+            setdialIndex(13)
+
+        }
+
+    }, [choiceUserIndex])
+
+    
     
 
     return (
@@ -138,6 +257,9 @@ export function CharA(props) {
                             
                             flyState = 3
                             setDialoG(!dialoG)
+                            setIndex(0)
+                            settalK(true)
+
                         }
                         }}
 
@@ -164,9 +286,7 @@ export function CharA(props) {
                 >
 
 
-
-                    Hello there! How are you traveller?
-                        
+                    {dialSparoch[dialIndex]}
 
                 </Text>
 
@@ -183,6 +303,9 @@ export function CharA(props) {
                         setDialoG(!dialoG)
                         settalK(false)
                         setHovered(false)
+                        setchoiceUserIndex(0)
+                        setdialIndex(0)
+                        setinputSwitch(false)
                     }}
 
 
@@ -209,8 +332,210 @@ export function CharA(props) {
                     visible={dialoG}
                     position={[-1.5, 0.2, 0.3]}
                     onClick={() => {
-                        setIndex(0)
-                        settalK(true)
+
+                        if (dialIndex == 0) {
+
+                            setchoiceUserIndex(3)
+
+
+                        }
+                        if (dialIndex == 1) {
+                            setchoiceUserIndex(13)
+
+                        }
+
+                        if (dialIndex == 2) {
+                            setchoiceUserIndex(22)
+                            
+                        }
+
+                        if (dialIndex == 3) {
+
+                            setchoiceUserIndex(31)
+                            
+                        }
+
+
+                        if (dialIndex == 4) {
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 5) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 6) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 7) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 8) {
+
+                            setinputSwitch(false)
+                            console.log("Hello there is it?: ${formValue}")
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 9) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 10) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+
+                        }
+
+                        if (dialIndex == 11) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 12) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+
+                        if (dialIndex == 13) {
+
+                            if (index == 0) {
+
+                                setIndex(1)
+
+                            }
+                            flyState = 1
+                            setDialoG(!dialoG)
+
+                            setHovered(false)
+                            setchoiceUserIndex(0)
+                            setdialIndex(0)
+
+                        }
+
+                    }}
+
+                >
+
+                    <planeGeometry args={[1.3, 0.7]} />
+
+                    <meshStandardMaterial color={"blue"} />
+
+                    <Text
+                        fontSize={0.1}
+                        font={"Philosopher"}
+                        color={"white"}
+
+                        maxWidth={1.3}
+                        textAlign={"center"}
+                    >
+                        {choiceUser[choiceUserIndex]}
+                    </Text>
+
+                </mesh>
+
+                //button 2
+
+
+                <mesh
+                    visible={talK}
+                    position={[-1.5, 0.95, 0.3]}
+                    onClick={() => {
+
+                        if (dialIndex == 0) {
+                            setchoiceUserIndex(7)
+                        }
+
+                        if (dialIndex == 1) {
+                            setchoiceUserIndex(16)
+
+                        }
+
+                        if (dialIndex == 2) {
+                            setchoiceUserIndex(25)
+                            setinputSwitch(true)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 3) {
+
+                            setchoiceUserIndex(34)
+
+                        }
+
+
+                        if (dialIndex == 4) {
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 5) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 6) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 7) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 8) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 9) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 10) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+
+                        }
+
+                        if (dialIndex == 11) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 12) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+
+
                     }}
 
 
@@ -228,31 +553,7 @@ export function CharA(props) {
                         maxWidth={1.3}
                         textAlign={"center"}
                     >
-                        Hello! Who are you?
-                    </Text>
-
-                </mesh>
-
-                <mesh
-                    visible={talK}
-                    position={[-1.5, 0.95, 0.3]}
-                    
-
-                >
-
-                    <planeGeometry args={[1.3, 0.7]} />
-
-                    <meshStandardMaterial color={"blue"} />
-
-                    <Text
-                        fontSize={0.1}
-                        font={"Philosopher"}
-                        color={"white"}
-
-                        maxWidth={1.3}
-                        textAlign={"center"}
-                    >
-                        What did you say?
+                        {choiceUser[choiceUserIndex + 1]}
                     </Text>
 
                 </mesh>
@@ -260,6 +561,86 @@ export function CharA(props) {
                 <mesh
                     visible={talK}
                     position={[-1.5, 1.7, 0.3]}
+                    onClick={() => {
+
+                        if (dialIndex == 0) {
+                            setchoiceUserIndex(10)
+                        }
+
+
+                        if (dialIndex == 1) {
+                            setchoiceUserIndex(19)
+
+                        }
+
+                        if (dialIndex == 2) {
+                            setchoiceUserIndex(28)
+
+                        }
+
+                        if (dialIndex == 3) {
+
+                            setchoiceUserIndex(37)
+
+                        }
+
+
+                        if (dialIndex == 4) {
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 5) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 6) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 7) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 8) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+
+                        }
+
+                        if (dialIndex == 9) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 10) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+
+                        }
+
+                        if (dialIndex == 11) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                        if (dialIndex == 12) {
+
+                            setchoiceUserIndex(40)
+                            settalK(false)
+                        }
+
+                    }}
 
 
                 >
@@ -276,11 +657,56 @@ export function CharA(props) {
                         maxWidth={1.3}
                         textAlign={"center"}
                     >
-                        That sounds a lot of fun.
+                        {choiceUser[choiceUserIndex + 2]}
                     </Text>
 
                 </mesh>
 
+
+                <mesh
+                    scale={inputSwitch? 1:0}
+                    position={[-1.5, 1.7, 0.3]}
+                >
+
+
+                    <planeGeometry args={[1.3, 1]} />
+
+                    <meshStandardMaterial color={"green"} />
+
+                    <Html
+
+                        transform={true}
+
+                    >
+
+
+                        <form onSubmit={handleSubmit}>
+
+
+                            <input
+
+
+
+                                value={formValue}
+
+
+
+                                onChange={(e) => setformValue(e.target.value)}
+
+
+
+
+                            />
+
+
+
+                        </form>
+
+
+                    </Html>
+
+
+                </mesh>
 
            
 
@@ -347,6 +773,12 @@ export function Flight() {
 
     )
             
+
+}
+
+export function handleSubmit() {
+
+  
 
 }
 

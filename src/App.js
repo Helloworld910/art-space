@@ -1,6 +1,6 @@
 import './App.css';
 import { Loader, Test } from './Utils.js'
-import { Flight, CharA } from './Character.js'
+import { Flight, CharA, handleSubmit } from './Character.js'
 import { Canvas, useFrame } from '@react-three/fiber'
 
 import { useRef, Suspense } from 'react';
