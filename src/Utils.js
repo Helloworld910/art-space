@@ -1,6 +1,6 @@
-import React from "react";
+import { React, useState } from "react";
 import { Html, useProgress } from '@react-three/drei'
-
+import { useFrame }from '@react-three/fiber'
 
 
 export function Loader() {
@@ -14,40 +14,42 @@ export function Loader() {
 }
 
 
-export function Test (){
-    
-    return (
+export function Test() {
 
-        <mesh
-            
-            position={[200, 300, -10]}>
+    const [checkHook, setcheckHook] = useState(false)
 
-            <sphereBufferGeometry
+    useFrame(({ clock }) => {
 
-                args={[7, 32, 16, 0, 6.283185307179586, 0, 3.141592653589793]}
+        console.log(Math.sin(clock.getElapsedTime()))
 
-            />
+        if (Math.sin(clock.getElapsedTime()) > 0.99) {
+            setcheckHook(true)
+        }
 
-            <meshStandardMaterial
+        if (Math.sin(clock.getElapsedTime()) < -0.99) {
+            setcheckHook(false)
+        }
+    })
 
-                visible={true}
-                wireframe={false}
-                color={"orange"}
 
-            />
-        </mesh>
-        
-        
-        
-        ) 
+        return (
+
+            <mesh
+
+                position={[220, 350, -10]}>
+
+                <sphereBufferGeometry
+
+                    args={[7, 60, 16, 0, 6.283185307179586, 0, 3.141592653589793]}
+
+                />
+
+                <meshStandardMaterial
+                    visible={checkHook}
+                    wireframe={false}
+                    color={"#a61f16"}
+                />
+
+            </mesh>
+        )
 }
-
-
-
-
-
-
-
-
-
-

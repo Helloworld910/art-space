@@ -1,7 +1,7 @@
 import './App.css';
 import { Loader, Test } from './Utils.js'
 import { Flight, CharA } from './Character.js'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 
 import { useRef, Suspense } from 'react';
 import { useTexture, Stars } from "@react-three/drei"
@@ -333,11 +333,11 @@ function App() {
 
 
 
-                    color={"orange"}
+                   
                     intensity={0.3}
                     distance={0}
                     decay={3}
-                    position={[0,0,-10]}
+                    position={[200,300,-10]}
 
                 />
 
@@ -357,11 +357,11 @@ function App() {
 
 
 
-                    color={"green"}
-                    intensity={1}
+                    color={"orange"}
+                    intensity={0.1}
                     distance={0}
                     decay={2}
-                    position={[200, 300, -10]}
+                    position={[0, 0, 0]}
 
                 />
 
