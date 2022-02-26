@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useGLTF, useAnimations, Billboard, Text, FlyControls, Html } from "@react-three/drei"
 import { a, useSpring } from "@react-spring/three"
 import { useFrame } from "@react-three/fiber"
-import { Form } from "./Form.js"
+import { HandleUserData } from "./HandleUserData.js"
 
 
 
@@ -80,14 +80,15 @@ export function CharA(props) {
 
 
 
-    const [formValue, setformValue] = useState("Feedback..")
+    const [formValue, setformValue] = useState("")
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setinputSwitch(false)
-        alert(`The name you entered was: ${formValue}`)
         setchoiceUserIndex(40)
         settalK(false)
+        HandleUserData(formValue)
+        setformValue("")
 
     }
 
@@ -328,6 +329,8 @@ export function CharA(props) {
 
                 </mesh>
 
+                //choice button one
+
                 <mesh
                     visible={dialoG}
                     position={[-1.5, 0.2, 0.3]}
@@ -381,10 +384,12 @@ export function CharA(props) {
 
                         if (dialIndex == 8) {
 
+                            //Input Submit Button
                             setinputSwitch(false)
-                            console.log("Hello there is it?: ${formValue}")
                             setchoiceUserIndex(40)
                             settalK(false)
+                            HandleUserData(formValue)
+                            setformValue("")
                         }
 
                         if (dialIndex == 9) {
@@ -671,36 +676,40 @@ export function CharA(props) {
 
                     <planeGeometry args={[1.3, 1]} />
 
-                    <meshStandardMaterial color={"green"} />
+                    <meshStandardMaterial
+                        color={"green"}
+                        transparent={true}
+                        opacity={0}
+                        
+                    />
 
                     <Html
 
                         transform={true}
-
+                        prepend={true}
                     >
 
+                        <div>
 
-                        <form onSubmit={handleSubmit}>
+                            <form
 
+                                
 
-                            <input
-
-
-
-                                value={formValue}
-
+                                onSubmit={handleSubmit}
+                            >
 
 
-                                onChange={(e) => setformValue(e.target.value)}
+                                <input
+                                    size={4}
+                                    fontSize={0.3}
+                                    placeholder={"..."}
+                                    value={formValue}
+                                    onChange={(e) => setformValue(e.target.value)}
 
+                                />
 
-
-
-                            />
-
-
-
-                        </form>
+                            </form>
+                        </div>
 
 
                     </Html>
