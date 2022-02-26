@@ -8,8 +8,9 @@ All of the assets actions, action-names and clips are available in its output.
 import React, { useEffect, useRef, useState } from "react"
 import { useGLTF, useAnimations, Billboard, Text, FlyControls, Html } from "@react-three/drei"
 import { a, useSpring } from "@react-spring/three"
-import { useFrame } from "@react-three/fiber"
+import { useFrame, useThree } from "@react-three/fiber"
 import { HandleUserData } from "./HandleUserData.js"
+
 
 
 
@@ -66,16 +67,25 @@ export function CharA(props) {
     const [choiceUserIndex, setchoiceUserIndex] = useState(0)
     const [dialIndex, setdialIndex] = useState(0)
     const [inputSwitch, setinputSwitch] = useState(false)
+
+    const [nearNow, setnearNow] = useState(false)
+
     // Animate the selection halo
-    const { color, scale } = useSpring({ scale: hovered ? [1.15, 1.15, 1] : [1, 1, 1], color: hovered ? "cyan" : "aquamarine" })
+    const { color, scale } = useSpring({ scale: hovered ? [1.15, 1.15, 1] : [1, 1, 1], color: hovered ? "cyan" : "aquamarine" });
     // Change cursor on hover-state
     useEffect(() => void (document.body.style.cursor = hovered ? "pointer" : "auto"), [hovered])
     // Change animation when the index changes
     useEffect(() => {
-        // Reset and fade in animation after an index has been changed
-        actions[names[index]].reset().fadeIn(0.5).play()
-        // In the clean-up phase, fade it out
-        return () => actions[names[index]].fadeOut(0.5)
+
+        if (nearNow == true) {
+
+            // Reset and fade in animation after an index has been changed
+            actions[names[index]].reset().fadeIn(0.5).play()
+            // In the clean-up phase, fade it out
+            return () => actions[names[index]].fadeOut(0.5)
+
+        }
+        
     }, [index, actions, names])
 
 
@@ -178,14 +188,30 @@ export function CharA(props) {
     }, [choiceUserIndex])
 
     
-    
+    const state = useThree()
+    const billRef = useRef()
+
+    var distance
+
+    useFrame(() => {
+
+        distance = state.camera.position.distanceTo(billRef.current.position)
+
+
+        if (distance < 10) {
+
+            setnearNow(true)
+
+        }
+
+    })
 
     return (
 
 
         <Billboard
 
-
+            ref={billRef}
             position={[200, 300, -10]}
             follow={true}
             lockX={false}
@@ -236,33 +262,56 @@ export function CharA(props) {
                     position={[0, 1, -1]}
                     scale={scale}
                     onPointerOver={() => {
-                        if (flyState != 3) {
 
-                            setHovered(true)
-                            flyState = 2
+                        if (nearNow == true) {
+
+                            if (flyState != 3) {
+
+                                setHovered(true)
+                                flyState = 2
+
+                            }
+
 
                         }
-                        }}
+
+
+                    }}
+
                     onPointerOut={() => {
-                        if (flyState != 3) {
 
-                            setHovered(false)
-                            flyState = 1
+                        if (nearNow == true) {
 
 
+                            if (flyState != 3) {
+
+                                setHovered(false)
+                                flyState = 1
+
+
+                            }
                         }
-                        }}
+
+
+                    }}
+
                     onClick={() => {
-                        if (flyState != 3) {
+                        if (nearNow == true) {
 
-                            
-                            flyState = 3
-                            setDialoG(!dialoG)
-                            setIndex(0)
-                            settalK(true)
 
+                            if (flyState != 3) {
+
+
+                                flyState = 3
+                                setDialoG(!dialoG)
+                                setIndex(0)
+                                settalK(true)
+
+                            }
                         }
-                        }}
+
+                    }
+                    }
 
                 >
 
@@ -292,7 +341,7 @@ export function CharA(props) {
                 </Text>
 
                 <mesh
-                    visible={dialoG}
+                    scale={dialoG ? 1:0}
                     position={[1.5, 1, 0.3]}
                     onClick={() => {
                         if (index == 0) {
@@ -332,7 +381,7 @@ export function CharA(props) {
                 //choice button one
 
                 <mesh
-                    visible={dialoG}
+                    scale={dialoG? 1:0}
                     position={[-1.5, 0.2, 0.3]}
                     onClick={() => {
 
@@ -459,7 +508,7 @@ export function CharA(props) {
 
 
                 <mesh
-                    visible={talK}
+                    scale={talK? 1:0}
                     position={[-1.5, 0.95, 0.3]}
                     onClick={() => {
 
@@ -564,7 +613,7 @@ export function CharA(props) {
                 </mesh>
 
                 <mesh
-                    visible={talK}
+                    scale={talK? 1:0}
                     position={[-1.5, 1.7, 0.3]}
                     onClick={() => {
 
@@ -732,9 +781,11 @@ export function Flight() {
 
     const flyRef = useRef()
 
-
+    
     useFrame(() =>
-    {
+
+    {       
+
         if (flyState == 2 || flyState == 3) {
 
             flyRef.current.movementSpeed = 0
@@ -785,11 +836,9 @@ export function Flight() {
 
 }
 
-export function handleSubmit() {
 
-  
+        
 
-}
 
 
 useGLTF.preload("/sparoch-ready-gltf.gltf");

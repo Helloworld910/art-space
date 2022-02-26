@@ -1,7 +1,7 @@
 import './App.css';
 import { Loader, Test } from './Utils.js'
-import { Flight, CharA, handleSubmit } from './Character.js'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Flight, CharA } from './Character.js'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 
 import { useRef, Suspense } from 'react';
 import { useTexture, Stars } from "@react-three/drei"
@@ -315,16 +315,14 @@ function SatC() {
 
 function App() {
 
+    
+  
+
     return (
 
         < Canvas
 
-            camera={{
-                aspect: window.innerWidth / window.innerHeight, fov: 45,
-                position: [0, 0, 500], near: 1, far: 20000
-            }}
-
-
+            camera={{aspect: window.innerWidth / window.innerHeight, near: 1, far: 2000, fov: 45, position: [0, 0, 500] }}
 
         >
 
@@ -368,7 +366,7 @@ function App() {
                 />
 
 
-
+                
                 <Flight/>
 
 
