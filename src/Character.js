@@ -23,32 +23,31 @@ let dialogState = 0
 
 
 
-const choiceUser = ["Yes! Where am I?", "Isn't everyone?", "Not at all. But who are you?",
+const choiceUser = ["Yes! Where am I?", "Isn't everyone?", "I am wandering. Who are you?",
     "Never heard of 'Deastra' before..", "I see. Are there others here?", "New? I think I saw a fossil in one of the planets!",
-    "porttitor ut", "iaculis quis, sem.", "In sem justo",
-    "commodo ut", "suscipit at,", "pharetra vitae",
-    "non sapien", "Proin mattis lacinia", "Nam quis nulla.",
-    "Aenean id metus", "id velit ullamcorper", "Phasellus enim erat",
-    "vestibulum vel", "aliquam a, posuere", "Integer tempor.",
-    "exercitation", "ullamco", "Etiam tristique non, ",
-    "Ut enim ad", "submit", "submittwo",
-    "Submit", "Donec iaculis", "venenatis quis, ante.",
-    "consequat eget,", "sapien elit,", "Duis interdum suscipit,  ",
-    "erat volutpat.", "ipsum. Aliquam", "Fusce aliquam vestibulum",
-    "sollicitudin et, dolor.", "commodo et,", "sapien nunc.",
-    "lmao", "I will exit now", "blank",
+    "porttitor ut", "No thank you.", "Yes I would like that.",
+    "Maybe next time.", "Why are you trapped?", "You don't look trapped to me.",
+    "Can I help free you?", "Yes, I'll go find my way.", "I know where I am now.",
+    "Well, I think you are too.", "Wow! I'll go see if they want to be friends.", "Okay.. I'll be carefull.",
+    "Sounds like rumours. I'll go explore.", "Look forward to spring then.", "Pity I missed it.",
+    "I'll go find my path.", "Yes, I like staying Anonymous.", "I just can't think of a good note right now.",
+    "Maybe I'll think about it.", "Submit", "submitone",
+    "submittwo", "So do I.", "And I will go enjoy now.",
+    "Don't count on it though.", "Well, I dont believe in prophecies. Bye.", "Sounds fun, I'd like to be trapped by prophecies too.",
+    "I'll go see if I can help you find the note.", "I see. I would like to help.", "You are just trapping yourself. I'll fly away now.",
+    "I'll go look for this note.", "Lmao. I'll fly away now.", "Old tounges are often wrong. That's what I have to say.",
+    "I can help with that. I do not like Lords myself.", "Perhaps", "blank",
     "blank"
 ]
 
 
 
 
-const dialSparoch = ["Hello! Are you lost, friend?","You are in Deastra, my friend. It is an ancient place. But from some ways, seems quite new.", "Integer malesuada",
-    "molestie", "Morbi scelerisque", "People often pass by. Some leave notes. But right now. I think it's just you and me. Be carefull of those 'rings' around the dead star though. Most information is yet lost, but it is heard that it is alive.",
-    "Integer lacinia.", "Mauris tincidunt", "Enter your name now",
-    "sem sed arcu.", "Nulla non lectus sed", "nisl molestie malesuada",
-    "lmao", "okay bye"]
-
+const dialSparoch = ["Hello friend! Are you lost?","You are in Deastra, my friend. It is an ancient place. But from some ways, seems quite new.", "In way, I suppose. Some like to leave a mark. Notes, that they want others to read. Would you like to do that as well?",
+    "I am Sparoch! I too like to wander. But I find myself trapped!", "For long the path here was found only in the knowledge of forsaken travellers that were lost. Perhaps, that is changing. Or wait! Didn't you say you were lost too?", "Right now, there's just me, you, and....well...the records are yet incomplete, but, it is often heard that those 'rings' are alive.",
+    "Ah yes. That's Threya. Used to be brimming with life. The most beautiful blooms. I do miss those. But from a different path, spring comes to it soon.", "Ah, you like to keep your notes to yourself, do you? Well in that you are not alone.", "Then please do. If I pass your note and its on display, you'll get an email.",
+    "I look forward to that time.", "A prophecy binds me. It is said in an old tounge that I am to pass on a note. Destined for Amre'hsa. Sent by Leo. Cursed apart by a million years, this note binds them still. And, it is to come to me. Here! Soon! Then, I will pass it along and be finally free.", "I assure you, I am. I am bound by a prophecy to wait here till I pass on Leo's note to Amre'hsa. It comes from 7000 years ago and is to travel 3000 more. In defiance to the cruel Lords who, jealous, cursed them apart by a million years.",
+    "I am bound by a prophecy spoken in the old tounge. I am to be here till I pass on a note. From Leo to Amre'hsa sent thousands of years ago. And is to travel thousand years more. In defiance of the Lords who cursed them apart by a million years.", "Then perhaps, we will speak again."]
 
 
 
@@ -326,11 +325,11 @@ export function CharA(props) {
 
                 <Text
 
-                    position={[0, 2.7, 0]}
+                    position={[0, 2.9, 0]}
                     
                     maxWidth={2}
-                    textAlign={"justify"}
-                    fontSize={0.13}
+                    textAlign={"center"}
+                    fontSize={0.15}
                     font={"Philosopher"}
                     color={"white"}
                     
@@ -368,7 +367,7 @@ export function CharA(props) {
                     <meshStandardMaterial color={"red"} />
 
                     <Text
-                        fontSize={0.1}
+                        fontSize={0.15}
                         font={"Philosopher"}
                         color={"white"}
                         
@@ -509,7 +508,7 @@ export function CharA(props) {
                     <meshStandardMaterial color={"blue"} />
 
                     <Text
-                        fontSize={0.1}
+                        fontSize={0.15}
                         font={"Philosopher"}
                         color={"white"}
 
@@ -617,7 +616,7 @@ export function CharA(props) {
                     <meshStandardMaterial color={"blue"} />
 
                     <Text
-                        fontSize={0.1}
+                        fontSize={0.15}
                         font={"Philosopher"}
                         color={"white"}
 
@@ -721,7 +720,7 @@ export function CharA(props) {
                     <meshStandardMaterial color={"blue"} />
 
                     <Text
-                        fontSize={0.1}
+                        fontSize={0.15}
                         font={"Philosopher"}
                         color={"white"}
 

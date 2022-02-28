@@ -17,7 +17,7 @@ async function getText() {
 
     // Create a query against the collection.
 
-    const q = query(collectionRef, orderBy("nickname", "desc"), limit(3));
+    const q = query(collectionRef, orderBy("nickname", "asc"), limit(3));
 
 
     const querySnapshot = await getDocs(q);
@@ -86,7 +86,7 @@ export function Wall() {
                 <Text
 
 
-                    fontSize={20}
+                    fontSize={15}
 
 
                 >
