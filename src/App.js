@@ -5,7 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 
 import { useRef, Suspense } from 'react';
 import { useTexture, Stars } from "@react-three/drei"
-
+import { Wall } from "./WallText.js"
 
 
 
@@ -322,7 +322,7 @@ function App() {
 
         < Canvas
 
-            camera={{aspect: window.innerWidth / window.innerHeight, near: 1, far: 2000, fov: 45, position: [0, 0, 500] }}
+            camera={{aspect: window.innerWidth / window.innerHeight, near: 0.4, far: 2000, fov: 45, position: [0, 0, 500] }}
 
         >
 
@@ -387,6 +387,7 @@ function App() {
                 <Test />
                 <CharA />
 
+                <Wall />
 
             </Suspense>
 

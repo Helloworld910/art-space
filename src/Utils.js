@@ -20,7 +20,7 @@ export function Test() {
 
     useFrame(({ clock }) => {
 
-        console.log(Math.sin(clock.getElapsedTime()))
+        
 
         if (Math.sin(clock.getElapsedTime()) > 0.99) {
             setcheckHook(true)
@@ -36,7 +36,7 @@ export function Test() {
 
             <mesh
 
-                position={[220, 350, -10]}>
+                position={[200, 340, -10]}>
 
                 <sphereBufferGeometry
 

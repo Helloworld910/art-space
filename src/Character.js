@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useGLTF, useAnimations, Billboard, Text, FlyControls, Html } from "@react-three/drei"
 import { a, useSpring } from "@react-spring/three"
 import { useFrame, useThree } from "@react-three/fiber"
-import { HandleUserData } from "./HandleUserData.js"
+import { handleSubmit } from "./inputHandle.js"
 
 
 
@@ -23,8 +23,8 @@ let dialogState = 0
 
 
 
-const choiceUser = ["Hello! Who are you?", "blank", "blank",
-    "Lorem ipsum dolor", "sit amet", "consectetuer adipiscing elit",
+const choiceUser = ["Yes! Where am I?", "Isn't everyone?", "Not at all. But who are you?",
+    "Never heard of 'Deastra' before..", "I see. Are there others here?", "New? I think I saw a fossil in one of the planets!",
     "porttitor ut", "iaculis quis, sem.", "In sem justo",
     "commodo ut", "suscipit at,", "pharetra vitae",
     "non sapien", "Proin mattis lacinia", "Nam quis nulla.",
@@ -43,8 +43,8 @@ const choiceUser = ["Hello! Who are you?", "blank", "blank",
 
 
 
-const dialSparoch = ["Hello there! How are you today?","Sed vel lectus.", "Integer malesuada",
-    "molestie", "Morbi scelerisque", "luctus velit.",
+const dialSparoch = ["Hello! Are you lost, friend?","You are in Deastra, my friend. It is an ancient place. But from some ways, seems quite new.", "Integer malesuada",
+    "molestie", "Morbi scelerisque", "People often pass by. Some leave notes. But right now. I think it's just you and me. Be carefull of those 'rings' around the dead star though. Most information is yet lost, but it is heard that it is alive.",
     "Integer lacinia.", "Mauris tincidunt", "Enter your name now",
     "sem sed arcu.", "Nulla non lectus sed", "nisl molestie malesuada",
     "lmao", "okay bye"]
@@ -67,7 +67,9 @@ export function CharA(props) {
     const [choiceUserIndex, setchoiceUserIndex] = useState(0)
     const [dialIndex, setdialIndex] = useState(0)
     const [inputSwitch, setinputSwitch] = useState(false)
-
+    const [nameValue, setnameValue] = useState("")
+    const [feedValue, setfeedValue] = useState("")
+    const [nickValue, setnickValue] = useState("")
     const [nearNow, setnearNow] = useState(false)
 
     // Animate the selection halo
@@ -93,17 +95,6 @@ export function CharA(props) {
 
 
 
-    const [formValue, setformValue] = useState("")
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setinputSwitch(false)
-        setchoiceUserIndex(40)
-        settalK(false)
-        HandleUserData(formValue)
-        setformValue("")
-
-    }
 
 
 
@@ -335,8 +326,10 @@ export function CharA(props) {
 
                 <Text
 
-                    position={[0, 2.2, 0]}
-
+                    position={[0, 2.7, 0]}
+                    
+                    maxWidth={2}
+                    textAlign={"justify"}
                     fontSize={0.13}
                     font={"Philosopher"}
                     color={"white"}
@@ -443,11 +436,26 @@ export function CharA(props) {
                         if (dialIndex == 8) {
 
                             //Input Submit Button
-                            setinputSwitch(false)
-                            setchoiceUserIndex(40)
-                            settalK(false)
-                            HandleUserData(formValue)
-                            setformValue("")
+                            
+                            if (nameValue == "") {
+                                alert("Please fill out the fields.")
+                            }
+                            else if (feedValue == "") {
+                                alert("Please fill out the fields.")
+                            }
+                            else {
+
+                                setinputSwitch(false)
+                                setchoiceUserIndex(40)
+                                settalK(false)
+                                handleSubmit(nameValue, feedValue, nickValue)
+                                setnameValue("")
+                                setfeedValue("")
+                                setnickValue("")
+                                
+
+                            }
+                            
                         }
 
                         if (dialIndex == 9) {
@@ -732,7 +740,7 @@ export function CharA(props) {
                 >
 
 
-                    <planeGeometry args={[1.3, 1]} />
+                    <planeGeometry args={[1.3, 4]} />
 
                     <meshStandardMaterial
                         color={"green"}
@@ -744,33 +752,133 @@ export function CharA(props) {
                     <Html
 
                         transform={true}
-                        prepend={true}
+                        
+
+
                     >
 
-                        <div>
+
+
 
                             <form
 
-                                
+                                onSubmit={(event) => {
 
-                                onSubmit={handleSubmit}
+                                    
+                                    event.preventDefault();
+                                    setinputSwitch(false)
+                                    setchoiceUserIndex(40)
+                                    settalK(false)
+                                    handleSubmit(nameValue, feedValue, nickValue)
+                                    setnameValue("")
+                                    setfeedValue("")
+                                    setnickValue("")
+
+                                }}
+
                             >
 
 
+                            <div>
+
                                 <input
+
                                     size={4}
+
                                     fontSize={0.3}
-                                    placeholder={"..."}
-                                    value={formValue}
-                                    onChange={(e) => setformValue(e.target.value)}
+
+
+
+                                    placeholder={"Note"}
+
+
+                                    value={feedValue}
+
+
+                                    onChange={(e) => setfeedValue(e.target.value)}
+
+                                    required
 
                                 />
 
-                            </form>
-                        </div>
 
 
-                    </Html>
+
+
+                            </div>
+
+
+                            <div>
+
+                                <input
+
+                                    size={4}
+
+                                    fontSize={0.3}
+
+
+
+                                    placeholder={"Name"}
+
+
+                                    value={nickValue}
+
+
+                                    onChange={(e) => setnickValue(e.target.value)}
+
+                                    required
+
+                                />
+
+
+                                
+                            </div>
+
+
+                            
+                            <input
+
+                                size={4}
+
+                                fontSize={0.3}
+
+
+
+                                type={"text"}
+
+
+                                placeholder={"Email"}
+
+
+
+
+
+                                value={nameValue}
+
+
+
+
+                                onChange={(e) => setnameValue(e.target.value)}
+
+
+
+                                required
+
+
+                            />
+
+                            <button hidden type="submit">Submit</button>
+
+                        </form>
+
+                        
+
+                            
+
+
+                    </Html >
+
+            
 
 
                 </mesh>
@@ -790,15 +898,19 @@ export function Flight() {
 
     const flyRef = useRef()
 
+
+
+
     
+
     useFrame(() =>
 
     {       
 
         if (flyState == 2 || flyState == 3) {
 
-            flyRef.current.movementSpeed = 0
-            flyRef.current.rollSpeed = 0
+            flyRef.current.movementSpeed = 0.03
+            flyRef.current.rollSpeed = 0.02
 
 
         }
