@@ -59,7 +59,7 @@ export function InstaBut() {
                 onClick={() => {
 
                     logEvent(analytics, 'Clicked Insta Button.');
-                    window.location.replace("https://www.instagram.com/lucy_psa1/")
+                    window.location.href = "https://www.instagram.com/lucy_psa1/"
 
 
                 }}

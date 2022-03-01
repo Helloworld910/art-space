@@ -5,6 +5,19 @@
 .env
 
 
+# Ignore firebase files
+/.firebase
+.firebaserc
+firebase.json
+
+
+# Ignore Build
+/build
+
+
+#Ignore vs files
+/.vs
+
 # dependencies
 /node_modules
 /.pnp

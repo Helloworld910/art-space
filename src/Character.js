@@ -915,9 +915,12 @@ export function Flight() {
 
     const flyRef = useRef()
 
+    var mobile = false
 
-
-
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+        // Take the user to a different screen here.
+        mobile = true
+    }
     
 
     useFrame(() =>
@@ -956,11 +959,12 @@ export function Flight() {
 
             ref={flyRef}
 
-            movementSpeed={20}
+            movementSpeed={mobile ? 100:20}
 
-            dragToLook={false}
+            dragToLook={mobile ? true:false}
 
-            rollSpeed={1}
+
+            rollSpeed={mobile ? 0.2:1}
 
 
 

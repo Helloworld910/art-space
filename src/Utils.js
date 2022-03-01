@@ -7,7 +7,19 @@ export function Loader() {
     const { progress } = useProgress()
     return (
 
-        <Html center> {progress} % loaded.</Html>
+
+        <Html center>
+
+           
+            <font size="4" color="white">
+
+                {progress} % loaded.
+
+            </font>
+
+
+           
+        </Html>
         
         )
     
