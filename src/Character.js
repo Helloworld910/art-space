@@ -931,14 +931,26 @@ export function Flight() {
 
             flyRef.current.movementSpeed = 0.03
             flyRef.current.rollSpeed = 0.02
+            if (mobile == true) {
 
+                flyRef.current.autoForward = false
+
+
+            }
 
         }
 
         if (flyState == 0 || flyState == 1) {
 
+
             flyRef.current.movementSpeed = 20
             flyRef.current.rollSpeed = 1
+            if (mobile == true) {
+
+                flyRef.current.autoForward = true
+
+
+            }
 
 
 
@@ -959,12 +971,14 @@ export function Flight() {
 
             ref={flyRef}
 
-            movementSpeed={mobile ? 100:20}
+            autoForward={mobile ? true:false}
 
-            dragToLook={mobile ? true:false}
+            movementSpeed={mobile ? 3:20}
+
+            dragToLook={false}
 
 
-            rollSpeed={mobile ? 0.2:1}
+            rollSpeed={mobile ? 0.3:1}
 
 
 
