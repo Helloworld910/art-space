@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Billboard, useTexture } from "@react-three/drei"
 import { a, useSpring } from "@react-spring/three"
-
+import { analytics } from "./firebaseCon.js"
+import { logEvent } from "firebase/analytics";
 
 
 export function InstaBut() {
@@ -41,6 +42,8 @@ export function InstaBut() {
                 onPointerOver={() => {
 
                     sethoveredSoc(true)
+                    logEvent(analytics, 'Hovered Insta Button.');
+
 
 
 
@@ -55,6 +58,7 @@ export function InstaBut() {
 
                 onClick={() => {
 
+                    logEvent(analytics, 'Clicked Insta Button.');
                     window.location.replace("https://www.instagram.com/lucy_psa1/")
 
 

@@ -10,7 +10,8 @@ import { useGLTF, useAnimations, Billboard, Text, FlyControls, Html } from "@rea
 import { a, useSpring } from "@react-spring/three"
 import { useFrame, useThree } from "@react-three/fiber"
 import { handleSubmit } from "./inputHandle.js"
-
+import { analytics } from "./firebaseCon.js"
+import { logEvent } from "firebase/analytics";
 
 
 
@@ -194,7 +195,7 @@ export function CharA(props) {
         if (distance < 10) {
 
             setnearNow(true)
-
+            logEvent(analytics, 'Reached Sparoch');
         }
 
         if (distance > 10) {
@@ -305,7 +306,7 @@ export function CharA(props) {
                                 setDialoG(!dialoG)
                                 setIndex(0)
                                 settalK(true)
-
+                                logEvent(analytics, 'Entered Conversation');
                             }
                         }
 
@@ -357,6 +358,7 @@ export function CharA(props) {
                         setchoiceUserIndex(0)
                         setdialIndex(0)
                         setinputSwitch(false)
+                        logEvent(analytics, 'Exit Conversation Hard');
                     }}
 
 
@@ -451,7 +453,7 @@ export function CharA(props) {
                                 setnameValue("")
                                 setfeedValue("")
                                 setnickValue("")
-                                
+                                logEvent(analytics, 'Entered Note');
 
                             }
                             
@@ -496,7 +498,7 @@ export function CharA(props) {
                             setHovered(false)
                             setchoiceUserIndex(0)
                             setdialIndex(0)
-
+                            logEvent(analytics, 'Exit conversation peacefully.');
                         }
 
                     }}
@@ -530,6 +532,7 @@ export function CharA(props) {
 
                         if (dialIndex == 0) {
                             setchoiceUserIndex(7)
+                            logEvent(analytics, 'Got asked to enter note.');
                         }
 
                         if (dialIndex == 1) {
@@ -541,6 +544,7 @@ export function CharA(props) {
                             setchoiceUserIndex(25)
                             setinputSwitch(true)
                             settalK(false)
+                            logEvent(analytics, 'Recieved Input fields.');
                         }
 
                         if (dialIndex == 3) {
@@ -759,19 +763,33 @@ export function CharA(props) {
 
 
 
-                            <form
 
-                                onSubmit={(event) => {
+                        <form
+
+
+                            onSubmit={(event) => {
 
                                     
-                                    event.preventDefault();
-                                    setinputSwitch(false)
-                                    setchoiceUserIndex(40)
-                                    settalK(false)
-                                    handleSubmit(nameValue, feedValue, nickValue)
-                                    setnameValue("")
-                                    setfeedValue("")
-                                    setnickValue("")
+
+                                event.preventDefault();
+
+                                setinputSwitch(false)
+
+                                setchoiceUserIndex(40)
+
+                                settalK(false)
+
+                                handleSubmit(nameValue, feedValue, nickValue)
+
+
+                                setnameValue("")
+
+
+                                setfeedValue("")
+
+                                setnickValue("")
+
+                                logEvent(analytics, 'Entered note.');
 
                                 }}
 

@@ -7,6 +7,7 @@ import { useRef, Suspense } from 'react';
 import { useTexture, Stars } from "@react-three/drei"
 import { Wall } from "./WallText.js"
 import { InstaBut } from "./Reflectors.js"
+import { logEvent } from "firebase/analytics";
 
 
 
