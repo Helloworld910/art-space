@@ -335,7 +335,8 @@ function App() {
             <Suspense fallback={<Loader />}>
 
 
-                
+                <Instructions />
+
 
 
                 <pointLight

@@ -1,35 +1,55 @@
-import { useState } from "react"
-import { Html } from "@react-three/drei"
+import { useState, useRef } from "react"
+import { Html, Billboard } from "@react-three/drei"
 
 
 export function Instructions() {
 
-    var mobCheck = useState(false)
+    const helpRef = useRef()
+    const [mobCheck, setmobCheck] = useState(false)
+
+    
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
         // Take the user to a different screen here.
-        mobCheck = true
+        setmobCheck(true)
     }
     
+   
 
 
     return (
 
+        <Billboard
 
-        <sprite position={[-10, 10, 10]} scale={1}>
+            scale={mobCheck ? 0:1}
+            ref={helpRef}
+            position={[0,10,450]}
+            follow={true}
+            lockX={false}
+            lockY={false}
+            lockZ={false} // Lock the rotation on the z axis (default=false)
 
-            <Html>
 
-                <font size="20" color="green"> Hold LC : Forward<br />Hold RC : Backward </font>
+        >
 
-            </Html>
+            <mesh visible={false}>
+
+                <planeGeometry args={[20, 10]} />
+
+                <meshStandardMaterial color={"black"} />
+                
+                <Html transform>
 
 
-            <spriteMaterial />
+                    <font size="10" color="white"> Hold LC : Forward<br />Hold RC : Backward </font>
 
-        </sprite>
 
-            
+                </Html>
+
+            </mesh>
+
+
+        </ Billboard>
         
         
         )
