@@ -12,7 +12,7 @@ import { useFrame, useThree } from "@react-three/fiber"
 import { handleSubmit } from "./inputHandle.js"
 import { analytics } from "./firebaseCon.js"
 import { logEvent } from "firebase/analytics";
-
+import * as THREE from "three"
 
 
 
@@ -206,6 +206,10 @@ export function CharA(props) {
 
     })
 
+
+    const sparochTalkPosition = new THREE.Vector3(200, 301, -11);
+    const exitTalkPosition = new THREE.Vector3(0, 0, 0);
+
     return (
 
 
@@ -303,9 +307,18 @@ export function CharA(props) {
 
 
                                 flyState = 3
+                                state.camera.position.set(200, 300, -6);
+                                state.camera.lookAt(sparochTalkPosition);
+                                
+                                
+                                
+
+
+
                                 setDialoG(!dialoG)
                                 setIndex(0)
                                 settalK(true)
+
                                 logEvent(analytics, 'Entered Conversation');
                             }
                         }
@@ -358,7 +371,10 @@ export function CharA(props) {
                         setchoiceUserIndex(0)
                         setdialIndex(0)
                         setinputSwitch(false)
+                        state.camera.lookAt(exitTalkPosition);
+
                         logEvent(analytics, 'Exit Conversation Hard');
+                        
                     }}
 
 
@@ -494,7 +510,7 @@ export function CharA(props) {
                             }
                             flyState = 1
                             setDialoG(!dialoG)
-
+                            state.camera.lookAt(exitTalkPosition);
                             setHovered(false)
                             setchoiceUserIndex(0)
                             setdialIndex(0)
@@ -921,7 +937,8 @@ export function Flight() {
         // Take the user to a different screen here.
         mobile = true
     }
-    
+
+
 
     useFrame(() =>
 
@@ -937,7 +954,8 @@ export function Flight() {
 
 
             }
-
+            
+            
         }
 
         if (flyState == 0 || flyState == 1) {

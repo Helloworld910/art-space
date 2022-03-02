@@ -7,7 +7,8 @@ import { useRef, Suspense } from 'react';
 import { useTexture, Stars } from "@react-three/drei"
 import { Wall } from "./WallText.js"
 import { InstaBut } from "./Reflectors.js"
-import { logEvent } from "firebase/analytics";
+
+import { Instructions } from "./Helper.js"
 
 
 
@@ -323,6 +324,8 @@ function App() {
 
     return (
 
+
+
         < Canvas
 
             camera={{aspect: window.innerWidth / window.innerHeight, near: 0.4, far: 2000, fov: 45, position: [0, 0, 500] }}
@@ -330,6 +333,9 @@ function App() {
         >
 
             <Suspense fallback={<Loader />}>
+
+
+                
 
 
                 <pointLight

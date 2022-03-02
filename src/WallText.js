@@ -1,11 +1,13 @@
 import { db } from "./firebaseCon.js"
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore"
 import { Billboard, Text } from "@react-three/drei"
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
 
 
 var wallText = [];
 var nicks = [];
+
 
 async function getText() {
 
@@ -48,14 +50,22 @@ export function Wall() {
 
     const [dataLoad, setdataLoad] = useState(false)
 
+    
     getText().then(() => {
 
-        console.log("data loaded")
         setdataLoad(true)
+
     })
 
-      
+    useEffect(() => {
 
+
+        console.log("data loaded")
+        
+
+    },[dataLoad])
+
+      
     
 
     const wallRef = useRef()
