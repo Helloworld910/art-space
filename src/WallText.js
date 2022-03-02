@@ -60,7 +60,7 @@ export function Wall() {
     useEffect(() => {
 
 
-        console.log("data loaded")
+        console.log("Data loaded")
         
 
     },[dataLoad])
@@ -97,7 +97,11 @@ export function Wall() {
 
 
                     fontSize={15}
+                    font={"Philosopher"}
 
+                    color={"white"}
+
+                    textAlign={"left"}
 
                 >
 

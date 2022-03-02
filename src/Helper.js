@@ -1,17 +1,17 @@
-import { useState, useRef } from "react"
-import { Html, Billboard } from "@react-three/drei"
+import { useRef } from "react"
+import { Billboard, Text } from "@react-three/drei"
 
 
 export function Instructions() {
 
     const helpRef = useRef()
-    const [mobCheck, setmobCheck] = useState(false)
+    var mobCheck = false
 
     
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
         // Take the user to a different screen here.
-        setmobCheck(true)
+        mobCheck = true
     }
     
    
@@ -21,7 +21,7 @@ export function Instructions() {
 
         <Billboard
 
-            scale={mobCheck ? 0:1}
+            scale={1}
             ref={helpRef}
             position={[0,10,450]}
             follow={true}
@@ -32,21 +32,35 @@ export function Instructions() {
 
         >
 
-            <mesh visible={false}>
 
-                <planeGeometry args={[20, 10]} />
+            <Text
 
-                <meshStandardMaterial color={"black"} />
-                
-                <Html transform>
+                visible={mobCheck ? false : true}
+                fontSize={1}
+                font={"Philosopher"}
+                color={"white"}
+                textAlign={"center"}>
+
+                {`Hold LC : Forward
+Hold RC : Backward`}
 
 
-                    <font size="10" color="white"> Hold LC : Forward<br />Hold RC : Backward </font>
+            </Text>
 
 
-                </Html>
+            <Text
+                visible={mobCheck ? true : false}
+                fontSize={1}
+                font={"Philosopher"}
+                color={"white"}
+                textAlign={"center"}>
 
-            </mesh>
+                {`You are on Auto-forward.
+Touch : Set Direction.`}
+
+
+            </Text>
+
 
 
         </ Billboard>

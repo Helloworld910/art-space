@@ -72,6 +72,15 @@ export function CharA(props) {
     const [nickValue, setnickValue] = useState("")
     const [nearNow, setnearNow] = useState(false)
 
+
+    var mobileTest = false
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+        // Take the user to a different screen here.
+        mobileTest = true
+    }
+
+
     // Animate the selection halo
     const { color, scale } = useSpring({ scale: hovered ? [1.15, 1.15, 1] : [1, 1, 1], color: hovered ? "cyan" : "aquamarine" });
     // Change cursor on hover-state
@@ -209,6 +218,7 @@ export function CharA(props) {
 
     const sparochTalkPosition = new THREE.Vector3(200, 301, -11);
     const exitTalkPosition = new THREE.Vector3(0, 0, 0);
+    
 
     return (
 
@@ -307,7 +317,15 @@ export function CharA(props) {
 
 
                                 flyState = 3
-                                state.camera.position.set(200, 300, -6);
+
+                                if (mobileTest == true) {
+                                    state.camera.position.set(200, 300, 2);
+
+                                }
+                                if (mobileTest == false) {
+                                    state.camera.position.set(200, 300, -6);
+
+                                }
                                 state.camera.lookAt(sparochTalkPosition);
                                 
                                 
@@ -951,6 +969,8 @@ export function Flight() {
             if (mobile == true) {
 
                 flyRef.current.autoForward = false
+        
+
 
 
             }
@@ -991,12 +1011,12 @@ export function Flight() {
 
             autoForward={mobile ? true:false}
 
-            movementSpeed={mobile ? 3:20}
+            movementSpeed={mobile ? 0.7:20}
 
             dragToLook={false}
 
 
-            rollSpeed={mobile ? 0.3:1}
+            rollSpeed={mobile ? 0.2:1}
 
 
 
